@@ -858,7 +858,6 @@ function getSidebar() {
   sidebar = sidebar && sidebar.querySelector('home-assistant-main');
   sidebar = sidebar && sidebar.shadowRoot;
   sidebar = sidebar && sidebar.querySelector('ha-drawer ha-sidebar');
-
   return sidebar;
 }
 
@@ -1016,89 +1015,109 @@ async function getConfig() {
   return lovelace;
 }
 
+
 // ##########################################################################################
 // ###   The Sidebar Card code base initialisation
 // ##########################################################################################
 
 async function buildSidebar() {
-  const lovelace = await getConfig();
-  if (lovelace.config.sidebar) {
-    const sidebarConfig = Object.assign({}, lovelace.config.sidebar);
-    if (!sidebarConfig.width || (sidebarConfig.width && typeof sidebarConfig.width == 'number' && sidebarConfig.width > 0 && sidebarConfig.width < 100) || (sidebarConfig.width && typeof sidebarConfig.width == 'object')) {
-      const root = getRoot();
-      const hassSidebar = getSidebar();
-      const appDrawerLayout = getAppDrawerLayout();
-      const appDrawer = getAppDrawer();
-      const offParam = getParameterByName('sidebarOff');
+  const hassSidebar = getSidebar();
+  // Get a reference to the <div class="title"> element
+  const titleDiv = hassSidebar.querySelector('.title');
 
-      if (sidebarConfig.hideTopMenu && sidebarConfig.hideTopMenu === true && offParam == null) {
-        if (root.shadowRoot.querySelector('ch-header')) root.shadowRoot.querySelector('ch-header').style.display = 'none';
-        if (root.shadowRoot.querySelector('app-header')) root.shadowRoot.querySelector('app-header').style.display = 'none';
-        if (root.shadowRoot.querySelector('ch-footer')) root.shadowRoot.querySelector('ch-footer').style.display = 'none';
-        if (root.shadowRoot.getElementById('view')) root.shadowRoot.getElementById('view').style.minHeight = 'calc(100vh)';
-      }
-      if (sidebarConfig.hideHassSidebar && sidebarConfig.hideHassSidebar === true && offParam == null) {
-        if (hassSidebar) {
-          hassSidebar.style.display = 'none';
-        }
-        if (appDrawerLayout) {
-          appDrawerLayout.style.marginLeft = '0';
-          appDrawerLayout.style.paddingLeft = '0';
-        }
-        if (appDrawer) {
-          appDrawer.style.display = 'none';
-        }
-      }
-      if (!sidebarConfig.breakpoints) {
-        sidebarConfig.breakpoints = {
-          tablet: 1024,
-          mobile: 768,
-        };
-      } else if (sidebarConfig.breakpoints) {
-        if (!sidebarConfig.breakpoints.mobile) {
-          sidebarConfig.breakpoints.mobile = 768;
-        }
-        if (!sidebarConfig.breakpoints.tablet) {
-          sidebarConfig.breakpoints.tablet = 1024;
-        }
-      }
+  // Create a new img element
+  const imageElement = document.createElement('img');
 
-      let appLayout = root.shadowRoot.querySelector('div');
-      let css = createCSS(sidebarConfig, document.body.clientWidth);
-      let style: any = document.createElement('style');
-      style.setAttribute('id', 'customSidebarStyle');
-      appLayout.appendChild(style);
-      style.type = 'text/css';
-      if (style.styleSheet) {
-        // This is required for IE8 and below.
-        style.styleSheet.cssText = css;
-      } else {
-        style.appendChild(document.createTextNode(css));
-      }
-      // get element to wrap
-      let contentContainer = appLayout.querySelector('#view');
-      // create wrapper container
-      const wrapper = document.createElement('div');
-      wrapper.setAttribute('id', 'customSidebarWrapper');
-      // insert wrapper before el in the DOM tree
-      contentContainer.parentNode.insertBefore(wrapper, contentContainer);
-      // move el into wrapper
-      let sidebar = document.createElement('div');
-      sidebar.setAttribute('id', 'customSidebar');
-      wrapper.appendChild(sidebar);
-      wrapper.appendChild(contentContainer);
-      await buildCard(sidebar, sidebarConfig);
-      //updateStyling(appLayout, sidebarConfig);
-      subscribeEvents(appLayout, sidebarConfig, contentContainer, sidebar);
-      setTimeout(function() {
-        updateStyling(appLayout, sidebarConfig);
-      }, 1);
-    } else {
-      error2console('buildSidebar', 'Error sidebar in width config!');
-    }
-  } else {
-    log2console('buildSidebar', 'No sidebar in config found!');
-  }
+  // Set the src attribute of the img element to the image URL
+  imageElement.src = 'LOGO_VIDA_BLUE.png'; // Replace 'your_image_url_here.jpg' with the actual image URL
+
+  // Clear the existing content of the titleDiv
+  titleDiv.innerHTML = '';
+
+  // Append the img element to the titleDiv
+  titleDiv.appendChild(imageElement);
+
+  // const lovelace = await getConfig();
+  // if (lovelace.config.sidebar) {
+  //   const sidebarConfig = Object.assign({}, lovelace.config.sidebar);
+  //   if (!sidebarConfig.width || (sidebarConfig.width && typeof sidebarConfig.width == 'number' && sidebarConfig.width > 0 && sidebarConfig.width < 100) || (sidebarConfig.width && typeof sidebarConfig.width == 'object')) {
+  //     const root = getRoot();
+  //     const hassSidebar = getSidebar();
+  //     const appDrawerLayout = getAppDrawerLayout();
+  //     const appDrawer = getAppDrawer();
+  //     const offParam = getParameterByName('sidebarOff');
+
+  //     changeSidebar(hassSidebar);
+
+
+  //     if (sidebarConfig.hideTopMenu && sidebarConfig.hideTopMenu === true && offParam == null) {
+  //       if (root.shadowRoot.querySelector('ch-header')) root.shadowRoot.querySelector('ch-header').style.display = 'none';
+  //       if (root.shadowRoot.querySelector('app-header')) root.shadowRoot.querySelector('app-header').style.display = 'none';
+  //       if (root.shadowRoot.querySelector('ch-footer')) root.shadowRoot.querySelector('ch-footer').style.display = 'none';
+  //       if (root.shadowRoot.getElementById('view')) root.shadowRoot.getElementById('view').style.minHeight = 'calc(100vh)';
+  //     }
+  //     if (sidebarConfig.hideHassSidebar && sidebarConfig.hideHassSidebar === true && offParam == null) {
+  //       if (hassSidebar) {
+  //         hassSidebar.style.display = 'none';
+  //       }
+  //       if (appDrawerLayout) {
+  //         appDrawerLayout.style.marginLeft = '0';
+  //         appDrawerLayout.style.paddingLeft = '0';
+  //       }
+  //       if (appDrawer) {
+  //         appDrawer.style.display = 'none';
+  //       }
+  //     }
+  //     if (!sidebarConfig.breakpoints) {
+  //       sidebarConfig.breakpoints = {
+  //         tablet: 1024,
+  //         mobile: 768,
+  //       };
+  //     } else if (sidebarConfig.breakpoints) {
+  //       if (!sidebarConfig.breakpoints.mobile) {
+  //         sidebarConfig.breakpoints.mobile = 768;
+  //       }
+  //       if (!sidebarConfig.breakpoints.tablet) {
+  //         sidebarConfig.breakpoints.tablet = 1024;
+  //       }
+  //     }
+
+  //     let appLayout = root.shadowRoot.querySelector('div');
+  //     let css = createCSS(sidebarConfig, document.body.clientWidth);
+  //     let style: any = document.createElement('style');
+  //     style.setAttribute('id', 'customSidebarStyle');
+  //     appLayout.appendChild(style);
+  //     style.type = 'text/css';
+  //     if (style.styleSheet) {
+  //       // This is required for IE8 and below.
+  //       style.styleSheet.cssText = css;
+  //     } else {
+  //       style.appendChild(document.createTextNode(css));
+  //     }
+  //     // get element to wrap
+  //     let contentContainer = appLayout.querySelector('#view');
+  //     // create wrapper container
+  //     const wrapper = document.createElement('div');
+  //     wrapper.setAttribute('id', 'customSidebarWrapper');
+  //     // insert wrapper before el in the DOM tree
+  //     contentContainer.parentNode.insertBefore(wrapper, contentContainer);
+  //     // move el into wrapper
+  //     let sidebar = document.createElement('div');
+  //     sidebar.setAttribute('id', 'customSidebar');
+  //     wrapper.appendChild(sidebar);
+  //     wrapper.appendChild(contentContainer);
+  //     await buildCard(sidebar, sidebarConfig);
+  //     //updateStyling(appLayout, sidebarConfig);
+  //     subscribeEvents(appLayout, sidebarConfig, contentContainer, sidebar);
+  //     setTimeout(function() {
+  //       updateStyling(appLayout, sidebarConfig);
+  //     }, 1);
+  //   } else {
+  //     error2console('buildSidebar', 'Error sidebar in width config!');
+  //   }
+  // } else {
+  //   log2console('buildSidebar', 'No sidebar in config found!');
+  // }
 }
 
   // show console message on init
