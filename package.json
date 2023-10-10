@@ -12,7 +12,7 @@
   ],
   "module": "boilerplate-card.js",
   "repository": "git@github.com:custom_cards/boilerplate-card.git",
-  "author": "Ian Richardson <iantrich@gmail.com>",
+  "author": "jARED <iantrich@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@ctrl/tinycolor": "^2.6.0",
