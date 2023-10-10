@@ -1020,8 +1020,8 @@ async function getConfig() {
 // ###   The Sidebar Card code base initialisation
 // ##########################################################################################
 
-async function buildSidebar() {
-  console.log("hi1")
+function buildSidebar() {
+  console.log("hi")
   const hassSidebar = getSidebar();
   // Get a reference to the <div class="title"> element
   const titleDiv = hassSidebar.shadowRoot.querySelector('.title');
@@ -1142,6 +1142,6 @@ console.info(
   'color: chartreuse; background: black; font-weight: 700;',
   'color: white; background: dimgrey; font-weight: 700;'
 );
-
+console.info('JAREAX');
 buildSidebar();
 watchLocationChange();
