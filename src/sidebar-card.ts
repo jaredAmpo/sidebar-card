@@ -1021,15 +1021,28 @@ async function getConfig() {
 // ##########################################################################################
 
 async function buildSidebar() {
+  console.log("hi1")
   const hassSidebar = getSidebar();
   // Get a reference to the <div class="title"> element
-  const titleDiv = hassSidebar.querySelector('.title');
+  const titleDiv = hassSidebar.shadowRoot.querySelector('.title');
 
   // Create a new img element
   const imageElement = document.createElement('img');
 
   // Set the src attribute of the img element to the image URL
-  imageElement.src = 'LOGO_VIDA_BLUE.png'; // Replace 'your_image_url_here.jpg' with the actual image URL
+  imageElement.src = 'https://vidabyfermax.com/wp-content/uploads/2018/06/LOGO_VIDA_BLUE.png'; // Replace with your image URL
+
+  // Apply styles to the titleDiv
+  titleDiv.style.width = 'auto';
+  titleDiv.style.height = '100%';
+  titleDiv.style.boxSizing = 'border-box';
+  titleDiv.style.margin = 'auto';
+  titleDiv.style.padding = '7px';
+
+  // Apply styles to the imageElement
+  imageElement.style.width = '100%';
+  imageElement.style.height = '100%';
+  imageElement.style.margin = 'auto';
 
   // Clear the existing content of the titleDiv
   titleDiv.innerHTML = '';
@@ -1037,6 +1050,8 @@ async function buildSidebar() {
   // Append the img element to the titleDiv
   titleDiv.appendChild(imageElement);
 
+// Append the titleDiv to the document or a parent container
+// Example: document.body.appendChild(titleDiv);
   // const lovelace = await getConfig();
   // if (lovelace.config.sidebar) {
   //   const sidebarConfig = Object.assign({}, lovelace.config.sidebar);
