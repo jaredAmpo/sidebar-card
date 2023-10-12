@@ -19,7 +19,11 @@ function setLoading() {
     const svgElement = document.querySelector('#ha-launch-screen svg');
 
     // Replace the SVG element with the new image element
-    svgElement.parentNode.replaceChild(newImage, svgElement);
+    if (svgElement) {
+        svgElement.parentNode.replaceChild(newImage, svgElement);
+    } else {
+        console.error('SVG element not found. Make sure the selector is correct.');
+    }
 }
   
   // ##########################################################################################
