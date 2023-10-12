@@ -1,4 +1,23 @@
-
+function setLoading() {
+    const newImage = document.createElement('img');
+    newImage.src = 'https://vidabyfermax.com/wp-content/uploads/2018/06/LOGO_VIDA_BLUE.png';
+  
+    const svgElement = document.querySelector('#ha-launch-screen svg');
+  
+    if (svgElement) {
+      svgElement.parentNode.replaceChild(newImage, svgElement);
+    } else {
+      console.error('SVG element not found. Make sure the selector is correct.');
+    }
+  }
+  
+  // Preload the image and call setLoading() when it's ready
+  const preloadedImage = new Image();
+  preloadedImage.src = 'https://vidabyfermax.com/wp-content/uploads/2018/06/LOGO_VIDA_BLUE.png';
+  preloadedImage.onload = () => {
+    setLoading();
+  };
+  
 // Returns the Home Assistant Sidebar element
 function getSidebar() {
     let sidebar = document.querySelector('home-assistant');
@@ -9,22 +28,22 @@ function getSidebar() {
     return sidebar;
 }
 
-function setLoading() {
-    const newImage = document.createElement('img');
+// function setLoading() {
+//     const newImage = document.createElement('img');
 
-    // Set the source (src) attribute to the desired image URL
-    newImage.src = 'https://vidabyfermax.com/wp-content/uploads/2018/06/LOGO_VIDA_BLUE.png';
+//     // Set the source (src) attribute to the desired image URL
+//     newImage.src = 'https://vidabyfermax.com/wp-content/uploads/2018/06/LOGO_VIDA_BLUE.png';
 
-    // Get a reference to the SVG element you want to replace
-    const svgElement = document.querySelector('#ha-launch-screen svg');
+//     // Get a reference to the SVG element you want to replace
+//     const svgElement = document.querySelector('#ha-launch-screen svg');
 
-    // Replace the SVG element with the new image element
-    if (svgElement && svgElement.parentNode) {
-        svgElement.parentNode.replaceChild(newImage, svgElement);
-    } else {
-        console.error('SVG element not found. Make sure the selector is correct.');
-    }
-}
+//     // Replace the SVG element with the new image element
+//     if (svgElement && svgElement.parentNode) {
+//         svgElement.parentNode.replaceChild(newImage, svgElement);
+//     } else {
+//         console.error('SVG element not found. Make sure the selector is correct.');
+//     }
+// }
   
   // ##########################################################################################
   // ###   The Sidebar Card code base initialisation
