@@ -7,7 +7,20 @@ function getSidebar() {
     sidebar = sidebar && sidebar.shadowRoot;
     sidebar = sidebar && sidebar.querySelector('ha-drawer ha-sidebar');
     return sidebar;
-  }
+}
+
+function setLoading() {
+    const newImage = document.createElement('img');
+
+    // Set the source (src) attribute to the desired image URL
+    newImage.src = 'https://vidabyfermax.com/wp-content/uploads/2018/06/LOGO_VIDA_BLUE.png';
+
+    // Get a reference to the SVG element you want to replace
+    const svgElement = document.querySelector('#ha-launch-screen svg');
+
+    // Replace the SVG element with the new image element
+    svgElement.parentNode.replaceChild(newImage, svgElement);
+}
   
   // ##########################################################################################
   // ###   The Sidebar Card code base initialisation
