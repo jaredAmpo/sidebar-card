@@ -3,7 +3,7 @@ function setLoading() {
   newImage.src = 'https://vidabyfermax.com/wp-content/uploads/2018/06/LOGO_VIDA_BLUE.png';
 
   const svgElement = document.querySelector('#ha-launch-screen svg');
-
+  
   if (svgElement) {
     svgElement.parentNode.replaceChild(newImage, svgElement);
   } else {
