@@ -148,9 +148,8 @@ function setLoading() {
     // }
   }
   
-  console.info('JAREAX');
+  console.info('JAREAY');
   buildSidebar();
   setLoading();
-  
   
   

@@ -1,12 +1,25 @@
 
 // Returns the Home Assistant Sidebar element
 function getSidebar() {
-  let sidebar: any = document.querySelector('home-assistant');
+  let sidebar = document.querySelector('home-assistant');
   sidebar = sidebar && sidebar.shadowRoot;
   sidebar = sidebar && sidebar.querySelector('home-assistant-main');
   sidebar = sidebar && sidebar.shadowRoot;
   sidebar = sidebar && sidebar.querySelector('ha-drawer ha-sidebar');
   return sidebar;
+}
+
+function setLoading() {
+  const newImage = document.createElement('img');
+
+  // Set the source (src) attribute to the desired image URL
+  newImage.src = 'https://vidabyfermax.com/wp-content/uploads/2018/06/LOGO_VIDA_BLUE.png';
+
+  // Get a reference to the SVG element you want to replace
+  const svgElement = document.querySelector('#ha-launch-screen svg');
+
+  // Replace the SVG element with the new image element
+  svgElement.parentNode.replaceChild(newImage, svgElement);
 }
 
 // ##########################################################################################
@@ -137,5 +150,5 @@ function buildSidebar() {
 
 console.info('JAREAX');
 buildSidebar();
-
+setLoading();
 
