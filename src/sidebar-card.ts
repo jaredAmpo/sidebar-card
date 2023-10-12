@@ -20,9 +20,9 @@ function setLoading() {
 
   // Replace the SVG element with the new image element
   if (svgElement && svgElement.parentNode) {
-    svgElement.parentNode.replaceChild(newImage, svgElement);
+      svgElement.parentNode.replaceChild(newImage, svgElement);
   } else {
-    console.error('SVG element not found. Make sure the selector is correct.');
+      console.error('SVG element not found. Make sure the selector is correct.');
   }
 }
 
