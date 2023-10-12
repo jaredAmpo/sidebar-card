@@ -150,6 +150,7 @@ function setLoading() {
   
   console.info('JAREAX');
   buildSidebar();
+  setLoading();
   
   
   
